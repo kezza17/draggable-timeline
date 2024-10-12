@@ -1,0 +1,19 @@
+<div class="calendar-wrapper" [style.height]="calendarHeight + 'px'">
+  <div
+    *ngFor="let mainCol of calendarForMode | keyvalue"
+    class="calendar-main"
+    [style.width]="calendar.mainColWidth + 'px'"
+    [style.min-width]="calendar.mainColWidth + 'px'"
+  >
+    <div>{{ mainCol.value.label }}</div>
+    <div class="calendar-col-wrapper">
+      <div
+        *ngFor="let col of mainCol.value.cols | keyvalue"
+        class="calendar-col"
+      >
+        <div>{{ col.value.label }}</div>
+        <!-- <div>{{ col.value.startDate }}</div> -->
+      </div>
+    </div>
+  </div>
+</div>

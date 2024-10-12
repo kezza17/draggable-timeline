@@ -1,0 +1,31 @@
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  margin: 0;
+  // padding: 30px;
+}
+
+html,
+body {
+  height: 100%;
+}
+.absolute {
+  position: absolute;
+}
+.top-0 {
+  top: 0;
+}
+.left-0 {
+  left: 0;
+}
+.top-full {
+  top: 100%;
+}
+.left-full {
+  left: 100%;
+}
+.top-half {
+  top: 50%;
+}
+.left-half {
+  left: 50%;
+}

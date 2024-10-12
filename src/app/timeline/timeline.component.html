@@ -1,0 +1,12 @@
+<div class="timeline">
+  <app-calendar></app-calendar>
+  <app-grid class="app-grid"></app-grid>
+
+  <select [(ngModel)]="viewMode" (ngModelChange)="viewModeChanges($event)">
+    <option value="week">Week</option>
+    <option value="month">Month</option>
+    <option value="quarter_year">3 Month</option>
+    <option value="half_year">6 Month</option>
+    <option value="year">Year</option>
+  </select>
+</div>

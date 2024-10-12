@@ -1,0 +1,97 @@
+<div
+  class="grid"
+  [style.height]="gridOptions.dimensions.rowHeight * grid[0].length + 'px'"
+>
+  <div
+    class="grid-container"
+    [style.grid-template-columns]="
+      'repeat(' + gridOptions.dimensions.cols + ', 1fr)'
+    "
+  >
+    <div *ngFor="let row of grid" class="grid-row">
+      <div
+        *ngFor="let space of row"
+        class="grid-cell"
+        [class.grid-cell-blue]="inOtherColumn(space.coord.col)"
+        [style.height]="gridOptions.dimensions.rowHeight + 'px'"
+        [style.width]="gridOptions.dimensions.colWidth + 'px'"
+      >
+        <div
+          class="grid-item"
+          [id]="space.id"
+          (mousedown)="setPreview(space)"
+          [class.grid-space-occupied]="space.occupied"
+        >
+          <!-- <span [hidden]="droppedData">r: {{ space.row }}</span> -->
+          <!-- <span [hidden]="droppedData">c: {{ space.col }}</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="preview-grid-item"
+    id="preview"
+    [style.top]="
+      previewItem.coord.row * gridOptions.dimensions.rowHeight + 'px'
+    "
+    [style.left]="
+      previewItem.coord.col * gridOptions.dimensions.colWidth + 'px'
+    "
+    [style.height]="
+      previewItem.size.rowspan * gridOptions.dimensions.rowHeight + 'px'
+    "
+    [style.width]="
+      previewItem.size.colspan * gridOptions.dimensions.colWidth + 'px'
+    "
+  ></div>
+
+  <div *ngFor="let gridItem of gridItems">
+    <div
+      class="rectangle"
+      [ngStyle]="gridItem.style"
+      mwlDraggable
+      dragActiveClass="drag-active"
+      [validateDrag]="validateDrag"
+      [dragSnapGrid]="dragSnapGrid"
+      [dragAxis]="gridOptions.drag.axis"
+      (dragStart)="dragStart(gridItem)"
+      (dragEnd)="dragEnd($event, gridItem)"
+      mwlResizable
+      [validateResize]="validateResize"
+      [enableGhostResize]="true"
+      [resizeSnapGrid]="resizeSnapGrid"
+      (resizeEnd)="onResizeEnd($event, gridItem)"
+      (resizeStart)="onResizeStart(gridItem)"
+    >
+      <div
+        class="resize-handle-top"
+        mwlResizeHandle
+        [resizeEdges]="{ top: gridOptions.resize.edges.top }"
+      ></div>
+      <div
+        class="resize-handle-left"
+        mwlResizeHandle
+        [resizeEdges]="{ left: gridOptions.resize.edges.left }"
+      ></div>
+      <div
+        class="resize-handle-right"
+        mwlResizeHandle
+        [resizeEdges]="{ right: gridOptions.resize.edges.right }"
+      ></div>
+      <div
+        class="resize-handle-bottom"
+        mwlResizeHandle
+        [resizeEdges]="{ bottom: gridOptions.resize.edges.bottom }"
+      ></div>
+
+      <div style="display: flex; gap: 15px; flex-direction: column">
+        <!-- <button (click)="removeItemFromGrid(gridItem)">remove</button>
+        <div>row: {{ gridItem.size.row }} col: {{ gridItem.size.col }}</div> -->
+        <div>
+          r: {{ gridItem.pos.coord.row }} c: {{ gridItem.pos.coord.col }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
